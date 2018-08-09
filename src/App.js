@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import GameBoard from './Components/Gameboard';
+import GameBoard from './Components/Gameboard/Gameboard';
 
 class App extends Component {
   render() {
