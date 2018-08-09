@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { allDice, shuffleBoard } from './utils/board'
+import { allDice, shuffleBoard , getRandomChar} from './utils/board'
 
 class App extends Component {
   render() {
-    console.log(shuffleBoard(allDice))
+    console.log(getRandomChar(shuffleBoard(allDice)[0]))
     return (
       <div className="App">
         <header className="App-header">

@@ -26,15 +26,18 @@ export const allDice = [
     'ooottu'
 ];
 
+export const getRandomIndex = ( length ) => Math.floor( Math.random() * length );
+
 /**
  * 
  * @param { array<string> } board 
+ * swap random elements in board
  */
 export const shuffleBoard = board => {
     for (let i = 0; i < board.length; i++) {
 
         // choose random from 0 -> 25
-        let randomIndex = Math.floor(Math.random() * board.length);
+        let randomIndex = getRandomIndex(board.length);
         let temp = board[ i ];
 
         // switch current element with random index element
@@ -43,3 +46,13 @@ export const shuffleBoard = board => {
     }
     return board;
 };
+
+
+/**
+ * 
+ * @param { array<string> } dice 
+ * returns a random chareacter from die
+ */
+export const getRandomChar = ( dice ) => {
+    return dice[ getRandomIndex( dice.split('').length ) ];
+}
