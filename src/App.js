@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { allDice, shuffleBoard , getRandomChar} from './utils/board'
+import GameBoard from './Components/Gameboard';
 
 class App extends Component {
   render() {
-    console.log(getRandomChar(shuffleBoard(allDice)[0]))
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <GameBoard></GameBoard>
       </div>
     );
   }
