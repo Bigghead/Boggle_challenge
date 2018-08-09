@@ -13,8 +13,27 @@ class App extends Component {
         board: getCharacterGrid( shuffleBoard(allDice) )
     }
 
+
     squareClick = ( currentRow, currentCol ) => {
-            console.log(currentRow, currentCol);
+        const { board } = this.state;
+        console.log(currentRow, currentCol);
+        let row = board[currentRow];
+        let newRow = row.map( ( char, i ) => { 
+            return { ...char, isSelected : i === currentCol };
+         } );
+        console.log(newRow)
+
+        // === update state with new clicked square === //
+        this.setState( {
+            board: board.map( ( boardRow, i ) => {
+                if( i === currentRow ) { 
+                    console.log( [ ...newRow ] );
+                    return [...newRow ];
+                }
+                return boardRow;
+            } )
+        } , () => console.log(this.state.board))
+        
     }
 
     render() {
@@ -41,7 +60,7 @@ const getCharacterGrid = ( ) => {
         boardGrid.push(emptyArr.slice());
         for( let j = 0; j < 5; j ++ ) {
             let char = getRandomChar(shuffledBoard.pop());
-            boardGrid[i][j] = char;
+            boardGrid[i][j] = { char, isSelected: false };
         }
      }
     return boardGrid;

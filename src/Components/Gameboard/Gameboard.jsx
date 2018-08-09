@@ -8,8 +8,8 @@ const buildGrid = ( gridArray, squareClick ) => {
         <div key={ Math.floor( Math.random() * 1000 ) }>
             { array.map( ( char, i ) => ( 
                 <Square key={ Math.floor( Math.random() * 1000 ) }
-                        isSelected={ false}
-                        char={ char } 
+                        isSelected={ char.isSelected}
+                        char={ char.char } 
                         currentRow={ index }
                         currentCol={ i }
                         squareClick={ (row, col) => squareClick(row, col) } >
