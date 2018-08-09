@@ -14,15 +14,13 @@ class App extends Component {
     }
 
     squareClick = ( currentRow, currentCol ) => {
-        return function( currentRow, currentCol ){
             console.log(currentRow, currentCol);
-        }
     }
 
     render() {
         return (
             <div className="App">
-                <GameBoard board={ this.state.board } squareClick={ this.squareClick }></GameBoard>
+                <GameBoard board={ this.state.board } squareClick={ (row, col) => this.squareClick(row,col) }></GameBoard>
             </div>
         );
     }

@@ -5,13 +5,14 @@ import Square from './square';
 const buildGrid = ( gridArray, squareClick ) => {
     return gridArray.map( ( array, index ) => {
     return ( 
-        <div>
+        <div key={ Math.floor( Math.random() * 1000 ) }>
             { array.map( ( char, i ) => ( 
-                <Square isSelected={ false}
+                <Square key={ Math.floor( Math.random() * 1000 ) }
+                        isSelected={ false}
                         char={ char } 
                         currentRow={ index }
                         currentCol={ i }
-                        squareClick={ squareClick } >
+                        squareClick={ (row, col) => squareClick(row, col) } >
 
                 </Square>
             ) )}
