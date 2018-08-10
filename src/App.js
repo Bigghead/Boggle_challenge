@@ -9,15 +9,16 @@ import { allDice, shuffleBoard , buildCharacterGrid, isNeighbor } from './utils/
 class App extends Component {
 
     state = {
-        board: buildCharacterGrid( shuffleBoard(allDice) ),
-        clickedCells : []
+        board       : buildCharacterGrid( shuffleBoard(allDice) ),
+        clickedCells: [],
+        currentWord : ''
     }
 
 
-    canClick = ( board, currentCells, char, currentRow, currentCol, currentIndex ) => {
+    canClick = ( board, char, currentRow, currentCol, currentIndex ) => {
         // first click?
-        if( currentCells.length === 0 && currentIndex === currentCol ) {
-            this.addCell( currentRow, currentCol );
+        if( this.state.clickedCells.length === 0 && currentIndex === currentCol ) {
+            this.addCell( currentRow, currentCol, char );
             return !char.isSelected;
         }
 
@@ -26,7 +27,7 @@ class App extends Component {
 
             // is it currently selected ? Does it have selected neightbors?
             if( !char.isSelected && isNeighbor(board, currentRow, currentCol) ) {
-                this.addCell( currentRow, currentCol );
+                this.addCell( currentRow, currentCol, char );
                 return true;
             };
             if( this.isLastCellClicked( char, currentRow, currentCol ) ) {
@@ -39,9 +40,10 @@ class App extends Component {
     }
 
 
-    addCell = ( row, col ) => {
+    addCell = ( row, col, { char } ) => {
         this.setState({
             clickedCells: [ ...this.state.clickedCells, [ row, col ] ],
+            currentWord : `${this.state.currentWord}${char}`
         } );
     }
 
@@ -53,7 +55,8 @@ class App extends Component {
         if( row === lastClicked[0] && col === lastClicked[1] ) {
             
             this.setState({
-                clickedCells: clickedCells.slice(0, clickedCells.length -1)
+                clickedCells: clickedCells.slice(0, clickedCells.length -1),
+                currentWord :this.state.currentWord.slice(0, -1)
             } )
             return true;
         } 
@@ -62,14 +65,14 @@ class App extends Component {
 
 
     cellClick = ( currentRow, currentCol ) => {
-        const { board, clickedCells } = this.state;
+        const { board } = this.state;
         let row = board[currentRow];
 
 
         let newRow = row.map( ( char, i ) => { 
             return { 
                 ...char, 
-                isSelected : this.canClick( board, clickedCells, char, currentRow, currentCol, i) 
+                isSelected : this.canClick( board, char, currentRow, currentCol, i) 
             };
         } );
 
