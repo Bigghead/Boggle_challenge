@@ -4,7 +4,7 @@ import './App.css';
 
 import GameBoard from './Components/Gameboard/Gameboard';
 
-import { allDice, shuffleBoard , getRandomChar } from './utils/board';
+import { allDice, shuffleBoard , getRandomChar, isNeighbor } from './utils/board';
 
 
 class App extends Component {
@@ -17,10 +17,13 @@ class App extends Component {
     squareClick = ( currentRow, currentCol ) => {
         const { board } = this.state;
         let row = board[currentRow];
+        isNeighbor(board, currentRow, currentCol);
+
+
         let newRow = row.map( ( char, i ) => { 
             return { 
                 ...char, 
-                isSelected : i === currentCol
+                isSelected : ( i === currentCol )
                      ? !char.isSelected
                          ? true
                          : false
