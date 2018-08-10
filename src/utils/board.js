@@ -76,7 +76,10 @@ export const buildCharacterGrid = ( ) => {
  * returns a random chareacter from die
  */
 export const getRandomChar = ( dice ) => {
-    return dice[ getRandomIndex( dice.split('').length ) ];
+    const character = dice[ getRandomIndex( dice.split('').length ) ];
+    return  character === 'q'
+            ? 'Qu'
+            : character.toUpperCase()
 }
 
 
@@ -99,6 +102,5 @@ export const isNeighbor = ( array, row, col ) => {
             }
         }
 
-    console.log(neighbors);
     return neighbors.some( cell => cell.isSelected === true );
 }
