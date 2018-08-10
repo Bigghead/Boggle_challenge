@@ -32,8 +32,11 @@ const Gameboard = ( { board, currentWord, cellClick, submit } ) => {
     return (
         <div className='game_board'>
             { buildGrid(board, cellClick) }
-            <h2>{ currentWord }</h2>
-            <button type='submit' onClick={ () => submit(currentWord) }>Submit</button>
+            <div className='submit_button_row'>
+                <button type='submit'
+                    className='submit_button'
+                    onClick={ () => submit(currentWord) }>Submit</button>
+            </div>
         </div>
     );
 };

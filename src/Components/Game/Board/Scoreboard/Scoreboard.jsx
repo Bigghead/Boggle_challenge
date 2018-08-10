@@ -1,8 +1,11 @@
 import React from 'react';
 
-const Scoreboard = ( { allWords } ) => {
+import './Scoreboard.css'
+
+const Scoreboard = ( { currentWord, allWords } ) => {
     return (
-        <div>
+        <div className='score_table'>
+            <h6>Current Word: { currentWord }</h6>
             <table>
                 <thead>
                     <tr>

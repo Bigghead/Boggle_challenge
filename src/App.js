@@ -125,7 +125,7 @@ class App extends Component {
                     cellClick={ (row, col) => this.cellClick(row,col) }
                     submit={ ( word ) => this.submit(word) }
                     ></GameBoard>
-                <Scoreboard allWords={ allWords }></Scoreboard>
+                <Scoreboard currentWord={ currentWord } allWords={ allWords }></Scoreboard>
             </div>
         );
     }
