@@ -13,9 +13,9 @@ import Square from '../../Square/square';
 const buildGrid = ( gridArray, cellClick ) => {
     return gridArray.map( ( array, index ) => {
         return ( 
-            <div key={ Math.floor( Math.random() * 10000 ) } className='grid_row'>
+            <div key={ Math.floor( Math.random() * 50000 ) } className='grid_row'>
                 { array.map( ( char, i ) => ( 
-                    <Square key={ Math.floor( Math.random() * 10000 ) }
+                    <Square key={ Math.floor( Math.random() * 50000 ) }
                             isSelected={ char.isSelected}
                             char={ char.char } 
                             currentRow={ index }
