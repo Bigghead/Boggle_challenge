@@ -6,7 +6,6 @@ const Square = ({ isSelected, char , currentRow, currentCol, cellClick }) => {
     return (
         <button className={ isSelected ? 'selected_square' : '' }
                 onClick={ () => cellClick(currentRow, currentCol)}
-        
         >
             { char }
         </button>

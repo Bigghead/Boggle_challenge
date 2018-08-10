@@ -10,8 +10,9 @@ class App extends Component {
 
     state = {
         board       : buildCharacterGrid( shuffleBoard(allDice) ),
+        currentWord : '',
         clickedCells: [],
-        currentWord : ''
+        allWords    : []
     }
 
 
@@ -86,14 +87,23 @@ class App extends Component {
         
     }
 
+
+    submit = ( word ) => {
+        debugger;
+        this.setState( { allWords: this.state.allWords.concat([word])} )
+    }
+
+
     render() {
         const { board, currentWord } = this.state;
         return (
             <div className="App">
                 <GameBoard 
                     board={ board } 
+                    currentWord={ currentWord }
                     cellClick={ (row, col) => this.cellClick(row,col) }
-                    currentWord={ currentWord }></GameBoard>
+                    submit={ ( word ) => this.submit(word) }
+                    ></GameBoard>
             </div>
         );
     }
