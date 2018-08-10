@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Scoreboard.css'
 
-const Scoreboard = ( { currentWord, allWords } ) => {
+const Scoreboard = ( { currentWord, currentScore, allWords } ) => {
     return (
         <div className='score_table'>
             <h6>Current Word: { currentWord }</h6>
@@ -10,7 +10,7 @@ const Scoreboard = ( { currentWord, allWords } ) => {
                 <thead>
                     <tr>
                         <th>Words</th>
-                        <th>Score</th>
+                        <th>Score: { currentScore }</th>
                     </tr>
                 </thead>
                 <tbody>

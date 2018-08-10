@@ -11,6 +11,7 @@ class Game extends Component {
     state = {
         board       : buildCharacterGrid( shuffleBoard(allDice) ),
         currentWord : '',
+        currentScore: 0,
         clickedCells: [],
         allWords    : []
     }
@@ -96,6 +97,7 @@ class Game extends Component {
             const result = await validateWord(word.toLowerCase());
             if( result.length === 0 ) throw new Error('Word not found');
 
+            const scoreCount = countScore(word);
             // === new board with all cells toggled off === //
             const newBoard = board.slice()
                 .map( ( row, index ) => {
@@ -111,8 +113,9 @@ class Game extends Component {
                 board      : newBoard,
                 allWords   : allWords.concat( [ { 
                     word, 
-                    score: countScore(word)
+                    score: scoreCount
                 } ] ),
+                currentScore: this.state.currentScore + scoreCount,
                 currentWord : '',
                 clickedCells: []
             } );
@@ -123,7 +126,7 @@ class Game extends Component {
 
 
     render() {
-        const { board, currentWord, allWords } = this.state;
+        const { board, currentWord, currentScore, allWords } = this.state;
         return (
             <div className='App'>
                 <GameBoard 
@@ -132,7 +135,10 @@ class Game extends Component {
                     cellClick={ (row, col) => this.cellClick(row,col) }
                     submit={ ( word ) => this.submit(word) }
                     ></GameBoard>
-                <Scoreboard currentWord={ currentWord } allWords={ allWords }></Scoreboard>
+                <Scoreboard 
+                    currentWord={ currentWord } 
+                    currentScore={ currentScore }
+                    allWords={ allWords }></Scoreboard>
             </div>
         );
     }
