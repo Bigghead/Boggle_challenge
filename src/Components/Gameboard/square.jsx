@@ -2,10 +2,10 @@ import React from 'react';
 
 import './square.css';
 
-const Square = ({ isSelected, char , currentRow, currentCol, squareClick }) => {
+const Square = ({ isSelected, char , currentRow, currentCol, cellClick }) => {
     return (
         <button className={ isSelected ? 'selected_square' : '' }
-                onClick={ () => squareClick(currentRow, currentCol)}
+                onClick={ () => cellClick(currentRow, currentCol)}
         
         >
             { char }

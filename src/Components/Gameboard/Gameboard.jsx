@@ -2,17 +2,17 @@ import React from 'react';
 import Square from './square';
 
 
-const buildGrid = ( gridArray, squareClick ) => {
+const buildGrid = ( gridArray, cellClick ) => {
     return gridArray.map( ( array, index ) => {
     return ( 
-        <div key={ Math.floor( Math.random() * 1000 ) }>
+        <div key={ Math.floor( Math.random() * 10000 ) }>
             { array.map( ( char, i ) => ( 
-                <Square key={ Math.floor( Math.random() * 1000 ) }
+                <Square key={ Math.floor( Math.random() * 10000 ) }
                         isSelected={ char.isSelected}
                         char={ char.char } 
                         currentRow={ index }
                         currentCol={ i }
-                        squareClick={ (row, col) => squareClick(row, col) } >
+                        cellClick={ (row, col) => cellClick(row, col) } >
 
                 </Square>
             ) )}
@@ -20,10 +20,10 @@ const buildGrid = ( gridArray, squareClick ) => {
     })
 }
 
-const Gameboard = ( { board, squareClick } ) => {
+const Gameboard = ( { board, cellClick } ) => {
     return (
         <div>
-            { buildGrid(board, squareClick) }
+            { buildGrid(board, cellClick) }
         </div>
     );
 };
