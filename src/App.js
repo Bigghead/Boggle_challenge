@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import GameBoard from './Components/Game/Board/Gameboard';
+import Scoreboard from './Components/Game/Board/Scoreboard';
 
 import { allDice, shuffleBoard , buildCharacterGrid, isNeighbor } from './utils/board';
 
@@ -89,13 +90,14 @@ class App extends Component {
 
 
     submit = ( word ) => {
-        debugger;
-        this.setState( { allWords: this.state.allWords.concat([word])} )
+        this.setState( { 
+            allWords: this.state.allWords.concat( [ { word, score: 1 } ] )
+        } );
     }
 
 
     render() {
-        const { board, currentWord } = this.state;
+        const { board, currentWord, allWords } = this.state;
         return (
             <div className="App">
                 <GameBoard 
@@ -104,6 +106,7 @@ class App extends Component {
                     cellClick={ (row, col) => this.cellClick(row,col) }
                     submit={ ( word ) => this.submit(word) }
                     ></GameBoard>
+                <Scoreboard allWords={ allWords }></Scoreboard>
             </div>
         );
     }
