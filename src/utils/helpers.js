@@ -34,3 +34,24 @@ export const countScore = ( word ) => {
 
     return scores[ word.length ];
 }
+
+
+
+/**
+ * 
+ * @param { string } word 
+ * returns an array of all found matches of word in dictionary
+ * not too accurate, need several letters to match right
+ */
+export const validateWord = async( word ) => {
+
+    try {
+        const result = await fetch(`http://api.pearson.com/v2/dictionaries/entries?headword=${word}`);
+                           
+        const data = await result.json();
+        return data.results;
+        
+    } catch( e ) {
+        console.log(e);
+    }
+}

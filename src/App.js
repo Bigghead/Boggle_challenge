@@ -5,7 +5,7 @@ import GameBoard from './Components/Game/Board/Gameboard/Gameboard';
 import Scoreboard from './Components/Game/Board/Scoreboard/Scoreboard';
 
 import { allDice, shuffleBoard , buildCharacterGrid } from './utils/board';
-import { isNeighbor, countScore } from './utils/helpers';
+import { isNeighbor, countScore, validateWord } from './utils/helpers';
 
 
 class App extends Component {
@@ -90,28 +90,37 @@ class App extends Component {
     }
 
 
-    submit = ( word ) => {
+    submit = async ( word ) => {
         const { allWords, board } = this.state;
 
-        // === new board with all cells toggled off === //
-        const newBoard = board.slice()
-            .map( ( row, index ) => {
-                return row.map( ( character, i ) => {
-                    return {
-                        ...character,
-                        isSelected: false
-                    }
+        try {
+
+            const result = await validateWord(word.toLowerCase());
+            if( result.length === 0 ) throw new Error('Word not found');
+
+            // === new board with all cells toggled off === //
+            const newBoard = board.slice()
+                .map( ( row, index ) => {
+                    return row.map( ( character, i ) => {
+                        return {
+                            ...character,
+                            isSelected: false
+                        }
+                    } );
                 } );
+
+            this.setState( { 
+                board      : newBoard,
+                allWords   : allWords.concat( [ { 
+                    word, 
+                    score: countScore(word)
+                } ] ),
+                currentWord : '',
+                clickedCells: []
             } );
-        this.setState( { 
-            board      : newBoard,
-            allWords   : allWords.concat( [ { 
-                word, 
-                score: countScore(word)
-            } ] ),
-            currentWord : '',
-            clickedCells: []
-        } );
+
+        } catch( e ) { alert(e); }
+            
     }
 
 
