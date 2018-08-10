@@ -4,7 +4,8 @@ import './App.css';
 import GameBoard from './Components/Game/Board/Gameboard';
 import Scoreboard from './Components/Game/Board/Scoreboard';
 
-import { allDice, shuffleBoard , buildCharacterGrid, isNeighbor } from './utils/board';
+import { allDice, shuffleBoard , buildCharacterGrid } from './utils/board';
+import { isNeighbor, countScore } from './utils/helpers';
 
 
 class App extends Component {
@@ -84,7 +85,7 @@ class App extends Component {
                 if( i === currentRow ) return newRow;
                 return boardRow;
             } )
-        } , () => console.log(this.state.board))
+        } );
         
     }
 
@@ -104,8 +105,12 @@ class App extends Component {
             } );
         this.setState( { 
             board      : newBoard,
-            allWords   : allWords.concat( [ { word, score: 1 } ] ),
-            currentWord: ''
+            allWords   : allWords.concat( [ { 
+                word, 
+                score: countScore(word)
+            } ] ),
+            currentWord : '',
+            clickedCells: []
         } );
     }
 
