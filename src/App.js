@@ -14,18 +14,50 @@ class App extends Component {
         clickedCells : []
     }
 
+
     canClick = ( board, currentCells, char, currentRow, currentCol, currentIndex ) => {
         // first click?
-        if( currentCells.length === 0 && currentIndex === currentCol ) return true;
+        if( currentCells.length === 0 && currentIndex === currentCol ) {
+            this.setState({
+                clickedCells: [ ...this.state.clickedCells, [ currentRow, currentCol ] ],
+            } );
+            return !char.isSelected;
+        }
 
         // right cell?
         if( currentIndex === currentCol ) {
 
             // is it currently selected ? Does it have selected neightbors?
-            if( !char.isSelected && isNeighbor(board, currentRow, currentCol) ) return true;
+            if( !char.isSelected && isNeighbor(board, currentRow, currentCol) ) {
+                this.setState({
+                    clickedCells: [ ...this.state.clickedCells, [ currentRow, currentCol ] ],
+                } );
+                return true;
+            };
+            if( this.isLastCellClicked( char, currentRow, currentCol ) ) {
+                return !char.isSelected;
+            }
         }
 
-        return false;
+
+        // cant click, leave as is
+        return char.isSelected;
+    }
+
+
+    isLastCellClicked = ( char, row, col ) => {
+        const { clickedCells } = this.state;
+        if( clickedCells.length === 0 ) return true;
+        const lastClicked = clickedCells[clickedCells.length -1];
+        if( row === lastClicked[0] && col === lastClicked[1] ) {
+            
+            this.setState({
+                clickedCells: clickedCells.slice(0, clickedCells.length -1)
+            } )
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -39,7 +71,9 @@ class App extends Component {
                 ...char, 
                 // right cell ?
                     // is cell currently selected
-                isSelected : this.canClick( board, clickedCells, char, currentRow, currentCol, i) ? true : char.isSelected
+                isSelected : this.canClick( board, clickedCells, char, currentRow, currentCol, i) 
+                            // ? true
+                            // : char.isSelected
 
                 // ( i === currentCol )
                 //      ? !char.isSelected
@@ -52,7 +86,6 @@ class App extends Component {
 
         // === update state with new clicked square === //
         this.setState( {
-            clickedCells: [ ...this.state.clickedCells, [ currentRow, currentCol ] ],
             board: board.map( ( boardRow, i ) => {
                 if( i === currentRow ) return newRow;
                 return boardRow;
