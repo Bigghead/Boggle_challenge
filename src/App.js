@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import GameBoard from './Components/Gameboard/Gameboard';
+import GameBoard from './Components/Game/Board/Gameboard';
 
 import { allDice, shuffleBoard , buildCharacterGrid, isNeighbor } from './utils/board';
 
@@ -87,9 +87,13 @@ class App extends Component {
     }
 
     render() {
+        const { board, currentWord } = this.state;
         return (
             <div className="App">
-                <GameBoard board={ this.state.board } cellClick={ (row, col) => this.cellClick(row,col) }></GameBoard>
+                <GameBoard 
+                    board={ board } 
+                    cellClick={ (row, col) => this.cellClick(row,col) }
+                    currentWord={ currentWord }></GameBoard>
             </div>
         );
     }

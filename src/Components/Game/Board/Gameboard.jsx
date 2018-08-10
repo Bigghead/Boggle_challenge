@@ -1,5 +1,5 @@
 import React from 'react';
-import Square from './square';
+import Square from '../Square/square';
 
 
 const buildGrid = ( gridArray, cellClick ) => {
@@ -20,10 +20,11 @@ const buildGrid = ( gridArray, cellClick ) => {
     })
 }
 
-const Gameboard = ( { board, cellClick } ) => {
+const Gameboard = ( { board, currentWord, cellClick } ) => {
     return (
         <div>
             { buildGrid(board, cellClick) }
+            <h2>{ currentWord }</h2>
         </div>
     );
 };
