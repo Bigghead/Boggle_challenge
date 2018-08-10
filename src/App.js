@@ -16,20 +16,23 @@ class App extends Component {
 
     squareClick = ( currentRow, currentCol ) => {
         const { board } = this.state;
-        console.log(currentRow, currentCol);
         let row = board[currentRow];
         let newRow = row.map( ( char, i ) => { 
-            return { ...char, isSelected : i === currentCol };
-         } );
-        console.log(newRow)
+            return { 
+                ...char, 
+                isSelected : i === currentCol
+                     ? !char.isSelected
+                         ? true
+                         : false
+                     : char.isSelected
+            
+            };
+        } );
 
         // === update state with new clicked square === //
         this.setState( {
             board: board.map( ( boardRow, i ) => {
-                if( i === currentRow ) { 
-                    console.log( [ ...newRow ] );
-                    return [...newRow ];
-                }
+                if( i === currentRow ) return newRow;
                 return boardRow;
             } )
         } , () => console.log(this.state.board))
