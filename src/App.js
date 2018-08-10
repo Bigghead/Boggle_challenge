@@ -10,30 +10,49 @@ import { allDice, shuffleBoard , getRandomChar, isNeighbor } from './utils/board
 class App extends Component {
 
     state = {
-        board: getCharacterGrid( shuffleBoard(allDice) )
+        board: getCharacterGrid( shuffleBoard(allDice) ),
+        clickedCells : []
+    }
+
+    canClick = ( board, currentCells, char, currentRow, currentCol, currentIndex ) => {
+        // first click?
+        if( currentCells.length === 0 && currentIndex === currentCol ) return true;
+
+        // right cell?
+        if( currentIndex === currentCol ) {
+
+            // is it currently selected ? Does it have selected neightbors?
+            if( !char.isSelected && isNeighbor(board, currentRow, currentCol) ) return true;
+        }
+
+        return false;
     }
 
 
     squareClick = ( currentRow, currentCol ) => {
-        const { board } = this.state;
+        const { board, clickedCells } = this.state;
         let row = board[currentRow];
-        isNeighbor(board, currentRow, currentCol);
 
 
         let newRow = row.map( ( char, i ) => { 
             return { 
                 ...char, 
-                isSelected : ( i === currentCol )
-                     ? !char.isSelected
-                         ? true
-                         : false
-                     : char.isSelected
+                // right cell ?
+                    // is cell currently selected
+                isSelected : this.canClick( board, clickedCells, char, currentRow, currentCol, i) ? true : char.isSelected
+
+                // ( i === currentCol )
+                //      ? !char.isSelected
+                //          ? ( isNeighbor(board, currentRow, currentCol) || clickedCells.length === 0) && true
+                //          : false
+                //      : char.isSelected
             
             };
         } );
 
         // === update state with new clicked square === //
         this.setState( {
+            clickedCells: [ ...this.state.clickedCells, [ currentRow, currentCol ] ],
             board: board.map( ( boardRow, i ) => {
                 if( i === currentRow ) return newRow;
                 return boardRow;
