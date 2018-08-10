@@ -1,0 +1,11 @@
+.game_board {
+    padding: 10px;
+    background: #398bd4;
+    border: 5px solid #ffca08;
+}
+
+.grid_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

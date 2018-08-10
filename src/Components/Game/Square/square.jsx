@@ -4,7 +4,7 @@ import './square.css';
 
 const Square = ({ isSelected, char , currentRow, currentCol, cellClick }) => {
     return (
-        <button className={ isSelected ? 'selected_square' : '' }
+        <button className={ 'cell ' + ( isSelected ? 'selected_square' : '' ) }
                 onClick={ () => cellClick(currentRow, currentCol)}
         >
             { char }

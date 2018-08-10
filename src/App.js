@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import GameBoard from './Components/Game/Board/Gameboard';
-import Scoreboard from './Components/Game/Board/Scoreboard';
+import GameBoard from './Components/Game/Board/Gameboard/Gameboard';
+import Scoreboard from './Components/Game/Board/Scoreboard/Scoreboard';
 
 import { allDice, shuffleBoard , buildCharacterGrid } from './utils/board';
 import { isNeighbor, countScore } from './utils/helpers';

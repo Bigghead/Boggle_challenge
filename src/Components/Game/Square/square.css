@@ -1,3 +1,15 @@
+.cell {
+    height: 46px;
+    width: 45px;
+    margin: 3px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: -2px 2px 2px #000;
+    outline: none;
+    border: none;
+    font-weight: 800;
+}
+
 .selected_square {
     background-color: orange;
 }

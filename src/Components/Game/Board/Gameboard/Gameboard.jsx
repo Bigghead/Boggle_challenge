@@ -1,5 +1,7 @@
 import React from 'react';
-import Square from '../Square/square';
+
+import './Gameboard.css';
+import Square from '../../Square/square';
 
 
 /**
@@ -11,7 +13,7 @@ import Square from '../Square/square';
 const buildGrid = ( gridArray, cellClick ) => {
     return gridArray.map( ( array, index ) => {
         return ( 
-            <div key={ Math.floor( Math.random() * 10000 ) }>
+            <div key={ Math.floor( Math.random() * 10000 ) } className='grid_row'>
                 { array.map( ( char, i ) => ( 
                     <Square key={ Math.floor( Math.random() * 10000 ) }
                             isSelected={ char.isSelected}
@@ -28,7 +30,7 @@ const buildGrid = ( gridArray, cellClick ) => {
 
 const Gameboard = ( { board, currentWord, cellClick, submit } ) => {
     return (
-        <div>
+        <div className='game_board'>
             { buildGrid(board, cellClick) }
             <h2>{ currentWord }</h2>
             <button type='submit' onClick={ () => submit(currentWord) }>Submit</button>
