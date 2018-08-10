@@ -90,8 +90,22 @@ class App extends Component {
 
 
     submit = ( word ) => {
+        const { allWords, board } = this.state;
+
+        // new board with all cells toggled off
+        const newBoard = board.slice()
+            .map( ( row, index ) => {
+                return row.map( ( character, i ) => {
+                    return {
+                        ...character,
+                        isSelected: false
+                    }
+                } );
+            } );
         this.setState( { 
-            allWords: this.state.allWords.concat( [ { word, score: 1 } ] )
+            board      : newBoard,
+            allWords   : allWords.concat( [ { word, score: 1 } ] ),
+            currentWord: ''
         } );
     }
 
