@@ -26,7 +26,6 @@ export const allDice = [
     'ooottu'
 ];
 
-export const getRandomIndex = ( length ) => Math.floor( Math.random() * length );
 
 /**
  * 
@@ -53,6 +52,7 @@ export const shuffleBoard = board => {
  * @param { array<string> } shuffledBoard array of already shuffled list of dice
  * make an empty 2d array of 5 x 5
  * for every cell in 2d array, put in an element from shuffledBoard ( the last in this case, since we pop )
+ * @returns { array<array<string>> }
  */
 export const buildCharacterGrid = ( ) => {
     let shuffledBoard = shuffleBoard(allDice);
@@ -81,3 +81,12 @@ export const getRandomChar = ( dice ) => {
             ? 'Qu'
             : character.toUpperCase()
 }
+
+
+/**
+ * 
+ * @param { number } length 
+ * returns a random index between 0 and length
+ */
+export const getRandomIndex = ( length ) => Math.floor( Math.random() * length );
+

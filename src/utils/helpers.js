@@ -1,8 +1,11 @@
 /**
  * Got from https://stackoverflow.com/questions/43816484/finding-the-neighbors-of-2d-array
- * @param {*} array 
- * @param {*} row 
- * @param {*} col 
+ * @param { array<array> } array 
+ * @param { number } row 
+ * @param { number } col 
+ * 
+ * loop through 2d array and get all surrounding neighbors of element at [row][col]
+ * return boolean value if any surrounding neighbors are currently selected
  */
 export const isNeighbor = ( array, row, col ) => {
 

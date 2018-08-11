@@ -90,7 +90,28 @@ class Game extends Component {
 
 
     submit = async ( word ) => {
+
         const { allWords, board } = this.state;
+
+        // === new board with all cells toggled off === //
+        const newBoard = board.slice()
+            .map( ( row, index ) => {
+                return row.map( ( character, i ) => {
+                    return {
+                        ...character,
+                        isSelected: false
+                    }   
+                } );
+            } );
+        
+        // === if currentWord has been submitted, reset board without adding score === //
+        if( allWords.some( w => w.word === word ) ) {
+            return this.setState( {
+                board       : newBoard,
+                currentWord : '',
+                clickedCells: []
+            } )
+        };
 
         try {
 
@@ -98,16 +119,6 @@ class Game extends Component {
             if( result.length === 0 ) throw new Error('Word not found');
 
             const scoreCount = countScore(word);
-            // === new board with all cells toggled off === //
-            const newBoard = board.slice()
-                .map( ( row, index ) => {
-                    return row.map( ( character, i ) => {
-                        return {
-                            ...character,
-                            isSelected: false
-                        }
-                    } );
-                } );
 
             this.setState( { 
                 board      : newBoard,
